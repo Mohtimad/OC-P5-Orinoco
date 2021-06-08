@@ -1,0 +1,18 @@
+//@import "./utils/variables";
+//@import "./utils/maps";
+//@import "./utils/mixins";
+
+@import "./base/base";
+//@import "./base/spinner";
+//@import "./base/typography";
+//@import "./base/animations";
+
+@import "./components/cards";
+//@import "./components/buttons";
+
+@import "./layout/header";
+@import "./layout/footer";
+
+@import "./pages/home";
+@import "./pages/contact";
+@import "./pages/store";
