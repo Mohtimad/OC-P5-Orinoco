@@ -1,4 +1,4 @@
-# OPENCLASSROOMS P4
+# OPENCLASSROOMS P5
 
 ## Architecture générale
 L’application web sera composée de 4 pages :
@@ -49,7 +49,7 @@ Chaque type de produit comporte un tableau contenant les strings correspondant a
 HTML, CSS, JavaScript.
 
 ## URL des API
-Ours en peluche faits à la main : [http://localhost:3000/api/teddies](http://localhost:3000/api/teddies)
+- Ours en peluche faits à la main : [http://localhost:3000/api/teddies](http://localhost:3000/api/teddies)
 - Caméras vintage : [http://localhost:3000/api/cameras](http://localhost:3000/api/cameras)
 - Meubles en chêne : [http://localhost:3000/api/furniture](http://localhost:3000/api/furniture)
 
