@@ -29,9 +29,6 @@
                         <a class="nav-link" href="index.html">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="cart.html">Panier</a>
                     </li>
                 </ul>
@@ -44,12 +41,59 @@
 
     <!-- START MAIN -->
     <main class="container-fluid site-content">
-        
+
+
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col  img-thumbnail pt-3 height--70vh">
+                    <div class="row">
+                        <div  class="col-12 d-flex justify-content-around">
+                        <a href="./products.html" class="previousName text-decoration-none"><i class="fas fa-arrow-left"></i> Nom</a>
+                        <h1 class="h3 name">Nom</h1>
+                        <a href="./products.html" class="nextName text-decoration-none">Nom <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col mt-5">
+                    <div class="row card-group justify-content-lg-center">
+                        <div class="col-12 col-md-6 col-lg-6 mb-3 align-items-center">
+                            <img src="./img/unknown.png" class="img-fluid img-thumbnail img--square" alt="...">
+                        </div>
+                        <br />
+                        <form class="col-12 col-md-6 col-lg-5">
+                            <label for="floatingInputGrid">Quantitée</label>
+                            <div class="form-floating  mb-3">
+                                <input type="number" value="1" min="1" max="99" class="form-control" id="floatingInputGrid">
+                            </div>
+                            <label for="floatingSelect">Lentilles</label>
+                            <select class="form-control form-control-md mb-4" id="floatingSelect">
+                                <option>---</option>
+                            </select>
+                            <div class="row mb-3 ">
+                            <div class="col-12 col-md-6">
+                                <button type="submit" class="btn btn-primary">Ajouter au panier</button>
+                              </div>
+                              <div class="col-auto mt-2">
+                                    <p class=""><span class="price h4">0.00€</span><small class="text-muted pl-2">Dont TVA</small></p>
+                              </div>
+                            </div>       
+                        </form>
+                        <div class="col-8 mt-2">
+                            <div class="row">
+                                <div class="col-md">
+                                    <p class="h6">Description:</p>
+                                    <p class="text-black description"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <!-- END MAIN -->
 
     <!-- START FOOTER -->
-    <footer class="container-fluid bg-secondary">
+    <footer class="container-fluid bg-secondary mt-4 pt-3">
         <div class="row">
             <div class="col">
                 <ul class="list-inline text-center text-white">
@@ -72,5 +116,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./scripts/products.js"></script>
 </body>
 </html>

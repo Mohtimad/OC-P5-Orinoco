@@ -9,37 +9,6 @@ body {
   flex: 1;
 }
 
-.font-family--Lobster {
-  font-family: "Lobster", cursive;
-}
-
-.bg--gray {
-  background-color: #f0f0f0;
-}
-.bg--black-contrast {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 1rem;
-}
-
-.margin-top-20 {
-  margin-top: 20px;
-}
-
-h1 {
-  font-size: 3.5rem;
-}
-
-header {
-  background-color: #F3E9F1;
-  box-shadow: 0 5px 20px gray;
-}
-
-footer {
-  margin-top: 40px;
-  padding-top: 20px;
-  box-shadow: 0 -5px 20px gray;
-}
-
 .fond {
   position: fixed;
   width: 100%;
@@ -59,13 +28,40 @@ footer {
   background: transparent;
 }
 
-.card-group {
-  margin-bottom: 1.2rem;
+.font-family--Lobster {
+  font-family: "Lobster", cursive;
+}
+
+.bg--gray {
+  background-color: #f0f0f0;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+.height--70vh {
+  min-height: 70vh;
+}
+
+header {
+  background-color: #F3E9F1;
+  box-shadow: 0 5px 20px gray;
+}
+
+footer {
+  box-shadow: 0 -5px 20px gray;
 }
 
 .card-img-top {
   object-fit: cover;
-  height: 175px;
+  height: 10rem;
+}
+
+.img--square {
+  object-fit: cover;
+  width: 100%;
+  height: 15rem;
 }
 
 /*# sourceMappingURL=style.css.map */
