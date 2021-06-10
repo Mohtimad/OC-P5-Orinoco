@@ -1,7 +1,6 @@
 function uptadetCards(value) {
     const elt = document.getElementById("card-list");
-    const numberOfItems = value.length;
-    for (let i = 0; i < numberOfItems; i++) {
+    for (let i = 0; i < value.length; i++) {
       elt.innerHTML += `<div class= "col-12 col-sm-6 col-lg-${2 + (i % 2)} card-group mb-4">
                           <div class="card shadow">
                               <h2 class="card-header fw-bold text-center h5 text-nowrap">

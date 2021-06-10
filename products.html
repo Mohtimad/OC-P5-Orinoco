@@ -45,46 +45,39 @@
 
         <div class="container-fluid mt-3">
             <div class="row">
-                <div class="col  img-thumbnail pt-3 height--70vh">
+                <div class="col  img-thumbnail pt-3">
                     <div class="row">
-                        <div  class="col-12 d-flex justify-content-around">
-                        <a href="./products.html" class="previousName text-decoration-none"><i class="fas fa-arrow-left"></i> Nom</a>
-                        <h1 class="h3 name">Nom</h1>
-                        <a href="./products.html" class="nextName text-decoration-none">Nom <i class="fas fa-arrow-right"></i></a>
+                        <div  class="col-12 d-flex justify-content-start">
+                        <a href="./index.html" class="text-decoration-none h3 mr-5 ml-4"><i class="fas fa-arrow-left"></i></a>
+                        <h1 class="h3 name" id="productName">Nom</h1>
+                        
                     </div>
                 </div>
                 <div class="col mt-5">
-                    <div class="row card-group justify-content-lg-center">
+                    <div class="row card-group justify-content-lg-start">
                         <div class="col-12 col-md-6 col-lg-6 mb-3 align-items-center">
-                            <img src="./img/unknown.png" class="img-fluid img-thumbnail img--square" alt="...">
+                            <img src="./img/unknown.png" class="img-fluid img-thumbnail img--square" id="productImg" alt="...">
                         </div>
-                        <br />
                         <form class="col-12 col-md-6 col-lg-5">
-                            <label for="floatingInputGrid">Quantitée</label>
+                            <label for="amount">Quantité</label>
                             <div class="form-floating  mb-3">
-                                <input type="number" value="1" min="1" max="99" class="form-control" id="floatingInputGrid">
+                                <input type="number" value="1" min="1" max="99" class="form-control" id="amount">
                             </div>
-                            <label for="floatingSelect">Lentilles</label>
-                            <select class="form-control form-control-md mb-4" id="floatingSelect">
-                                <option>---</option>
+                            <label for="lensesOptions">Lentilles</label>
+                            <select class="form-control form-control-md mb-4" id="lensesOptions">
+                                <!--JavaScript-->
                             </select>
                             <div class="row mb-3 ">
-                            <div class="col-12 col-md-6">
-                                <button type="submit" class="btn btn-primary">Ajouter au panier</button>
-                              </div>
-                              <div class="col-auto mt-2">
-                                    <p class=""><span class="price h4">0.00€</span><small class="text-muted pl-2">Dont TVA</small></p>
-                              </div>
-                            </div>       
-                        </form>
-                        <div class="col-8 mt-2">
-                            <div class="row">
-                                <div class="col-md">
-                                    <p class="h6">Description:</p>
-                                    <p class="text-black description"></p>
+                                <div class="col-12 col-md-6">
+                                    <button type="submit" class="btn btn-primary text-nowrap">Ajouter au panier</button>
+                                </div>
+                                <div class="col-auto mt-2">
+                                    <p class=""><span id="price" class="h4">0.00</span>€<small class="text-muted pl-2">Dont TVA</small></p>
                                 </div>
                             </div>
-                        </div>
+                            <p class="h5">Description:</p>
+                            <p class="text-black" id="description"></p>
+                        </form>
                     </div>
                 </div>
             </div>
