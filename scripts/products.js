@@ -1,50 +1,121 @@
-function updateProducts(value) {
+class CartStorage {
+  constructor(id, lense, amount, available) {
+    this.id = id;
+    this.lense = lense;
+    this.amount = amount;
+    this.available = available;
+  }
+}
 
-    /* Update Price */
+function updateProduct(data) {
+    /* ---------- ENABLE AMOUNT IMPUT ---------- */
+    const eltAmount = document.getElementById("amount");
+    eltAmount.removeAttribute("disabled");
+    /* ---------- UPDATE PRICE AND ITEM MIN / MAX---------- */
     document.getElementById("price")
-        .textContent = (value.price / 100).toFixed(2);
-
-    /* Update name */
+        .textContent = (data.price / 100).toFixed(2);
+      eltAmount.setAttribute("min", minAmount)
+      eltAmount.setAttribute("max", maxAmount)
+    /* ---------- UPDATE PRODUCT NAME ---------- */
     document.getElementById("productName")
-        .textContent = value.name;
-
-    /* Update options */
-    console.log(value.lenses.length);
-    for (let i = 0; i < value.lenses.length; i++) {
-        document.getElementById("lensesOptions")
-        .innerHTML += `<option>${value.lenses[i]}</option>`
+        .textContent = data.name;
+    /* ---------- UPDATE OPTIONS ---------- */
+    for (let i = 0; i < data.lenses.length; i++) {
+      let lensesOptions = document.getElementById("lensesOptions");
+      if (!data.lenses[0]) {
+      break;
+      } else {
+        lensesOptions.innerHTML += `<option>${data.lenses[i]}</option>`;
+        lensesOptions.removeAttribute("disabled");
+      }
     }
-    /* Update description */
+    /* ---------- UPDATE DESCRIPTION ---------- */
     document.getElementById("description")
-        .textContent = value.description;
-        
-    /* Update img */
-    document.getElementById("productImg")
-        .setAttribute("src", value.imageUrl);
+        .textContent = data.description;
+    /* ---------- UPDATE URL & ALT IMAGE ---------- */
+    eltImg = document.getElementById("productImg");
+    eltImg.setAttribute("src", data.imageUrl);
+    eltImg.setAttribute("alt", "Caméra " + data.name);
 }
     
-function updatePrice(value) {
-    let amount = 0;
+function updatePrice(data) {
     let eltAmount = document.getElementById('amount');
-    eltAmount.addEventListener('input', function() {
-        document.getElementById("price").textContent = (document.getElementById('amount').value * (value.price / 100)).toFixed(2);
+    eltAmount.addEventListener('input', function(e) {
+        const amount = e.target.value;
+        if (amount >= minAmount && amount <= maxAmount) {
+          // Convert cts to €uros
+          document.getElementById("price")
+            .textContent = (amount * (data.price / 100)).toFixed(2);
+          e.target.nextElementSibling.hidden = true;
+        } else {
+          e.target.nextElementSibling.hidden = false;
+        }
     });
 }
 
-let parsedUrl = new URL(window.location.href);
-let urlId = parsedUrl.searchParams.get("id");
-fetch("http://localhost:3000/api/cameras/" + urlId)
-  .then(function(res) {
-    if (res.ok) {
-      return res.json();
+function updadeIconItemToCart() {
+  let localStorageCart = JSON.parse(localStorage.getItem('items'));
+  let totalItemsNumber = 0;
+  if (localStorageCart.length !== 0) {
+    for  ( let i = 0; i < localStorageCart.length; i++) { 
+      totalItemsNumber += parseInt(localStorageCart[i].amount)
     }
+    if (totalItemsNumber !== 0) {
+      document.getElementById('cartNumber').textContent = totalItemsNumber;
+    }
+  }
+}
+
+
+function addToCart() {
+  const buttonSubmit = document.getElementById('addToCart');
+  buttonSubmit.addEventListener('click', function(e) {
+    const lense = document.getElementById("lensesOptions").selectedIndex;
+    const amount = parseInt(document.getElementById('amount').value);
+    if (amount <= maxAmount && amount > minAmount) { 
+      if (localStorage.length === 0) {
+        let newStorageCart = [];
+        newStorageCart[0] = new CartStorage (idURL, lense, amount, true);
+        localStorage.setItem('items', JSON.stringify(newStorageCart))
+      } else {
+        let storageCart = JSON.parse(localStorage.getItem('items'));
+        for ( let i = 0; i < storageCart.length ; i++) {
+          if (storageCart[i].id === idURL) {
+            storageCart[i] = new CartStorage (idURL, lense, amount, true);
+            break;
+          } else {
+            if ( i + 1 === storageCart.length) { 
+              storageCart.push(new CartStorage (idURL, lense, amount, true));
+            }
+          }
+        }
+        localStorage.setItem('items', JSON.stringify(storageCart));
+      }
+        updadeIconItemToCart();
+     }
   })
-  .then(function(value) {
-      
-    console.log(value);
-    updatePrice(value)
-    updateProducts(value);
-  })
-  .catch(function(err) {
-    // Une erreur est survenue
-  });
+}
+
+
+const minAmount = 1;
+const maxAmount = 10;
+
+let parsedUrl = new URL(window.location.href);
+const idURL = parsedUrl.searchParams.get("id");
+  fetch("http://localhost:3000/api/cameras/" + idURL)
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then(function(value) {
+        updadeIconItemToCart();
+        updateProduct(value);
+        updatePrice(value)
+        addToCart()
+    })
+    .catch(function(err) {
+      document.getElementById("productName")
+        .textContent = ("Cette élément n’existe pas ou n’est plus disponible.");
+      document.getElementById('addToCart').setAttribute("disabled", "");
+    });

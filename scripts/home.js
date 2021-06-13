@@ -1,7 +1,7 @@
 function uptadetCards(value) {
     const elt = document.getElementById("card-list");
     for (let i = 0; i < value.length; i++) {
-      elt.innerHTML += `<div class= "col-12 col-sm-6 col-lg-${2 + (i % 2)} card-group mb-4">
+      elt.innerHTML += `<div class= "col-12 col-sm-6 col-lg-4 card-group mb-4">
                           <div class="card shadow">
                               <h2 class="card-header fw-bold text-center h5 text-nowrap">
                                 ${value[i].name}
@@ -17,6 +17,19 @@ function uptadetCards(value) {
     }
 }
 
+function updadeIconItemToCart() {
+  let localStorageCart = JSON.parse(localStorage.getItem('items'));
+  let totalItemsNumber = 0;
+  if (localStorageCart.length !== 0) {
+    for  ( let i = 0; i < localStorageCart.length; i++) { 
+      totalItemsNumber += parseInt(localStorageCart[i].amount)
+    }
+    if (totalItemsNumber !== 0) {
+      document.getElementById('cartNumber').textContent = totalItemsNumber;
+    }
+  }
+}
+
 fetch("http://localhost:3000/api/cameras")
   .then(function(res) {
     if (res.ok) {
@@ -24,8 +37,9 @@ fetch("http://localhost:3000/api/cameras")
     }
   })
   .then(function(value) {
-    console.log(value);
     uptadetCards(value);
+    
+    updadeIconItemToCart()
   })
   .catch(function(err) {
     // Une erreur est survenue
