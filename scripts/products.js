@@ -3,7 +3,6 @@ class CartStorage {
     this.id = id;
     this.lense = lense;
     this.amount = amount;
-    this.available = available;
   }
 }
 
@@ -54,14 +53,17 @@ function updatePrice(data) {
 }
 
 function updadeIconItemToCart() {
-  let localStorageCart = JSON.parse(localStorage.getItem('items'));
-  let totalItemsNumber = 0;
-  if (localStorageCart.length !== 0) {
-    for  ( let i = 0; i < localStorageCart.length; i++) { 
-      totalItemsNumber += parseInt(localStorageCart[i].amount)
-    }
-    if (totalItemsNumber !== 0) {
-      document.getElementById('cartNumber').textContent = totalItemsNumber;
+  if (localStorage.length !== 0) {
+    let localStorageCart = JSON.parse(localStorage.getItem('items'));
+    console.log(localStorageCart)
+    let totalItemsNumber = 0;
+    if (localStorageCart.length !== 0) {
+      for  ( let i = 0; i < localStorageCart.length; i++) { 
+        totalItemsNumber += parseInt(localStorageCart[i].amount)
+      }
+      if (totalItemsNumber !== 0) {
+        document.getElementById('cartNumber').textContent = totalItemsNumber;
+      }
     }
   }
 }
@@ -72,20 +74,20 @@ function addToCart() {
   buttonSubmit.addEventListener('click', function(e) {
     const lense = document.getElementById("lensesOptions").selectedIndex;
     const amount = parseInt(document.getElementById('amount').value);
-    if (amount <= maxAmount && amount > minAmount) { 
+    if (amount <= maxAmount && amount >= minAmount) { 
       if (localStorage.length === 0) {
         let newStorageCart = [];
-        newStorageCart[0] = new CartStorage (idURL, lense, amount, true);
+        newStorageCart[0] = new CartStorage (idURL, lense, amount);
         localStorage.setItem('items', JSON.stringify(newStorageCart))
       } else {
         let storageCart = JSON.parse(localStorage.getItem('items'));
         for ( let i = 0; i < storageCart.length ; i++) {
           if (storageCart[i].id === idURL) {
-            storageCart[i] = new CartStorage (idURL, lense, amount, true);
+            storageCart[i] = new CartStorage (idURL, lense, amount);
             break;
           } else {
             if ( i + 1 === storageCart.length) { 
-              storageCart.push(new CartStorage (idURL, lense, amount, true));
+              storageCart.push(new CartStorage (idURL, lense, amount));
             }
           }
         }

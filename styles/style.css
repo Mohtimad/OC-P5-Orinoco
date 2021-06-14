@@ -1,4 +1,4 @@
-/* ----- Fixe le "footer" en bas de page ------ */
+/* ----- Fixer le "footer" en bas de page ------ */
 body {
   margin: 0;
   margin: auto;
@@ -20,17 +20,15 @@ body {
 .bg--gray {
   background-color: #f0f0f0;
 }
+.bg--by-theme {
+  background-color: #F3E9F1;
+}
 
 h1 {
   font-size: 3.5rem;
 }
 
-.height--70vh {
-  min-height: 70vh;
-}
-
 header {
-  background-color: #F3E9F1;
   box-shadow: 0 5px 20px gray;
 }
 
@@ -60,6 +58,12 @@ footer {
   color: white;
   text-shadow: black 0.3em 0.3em 0.3em;
   background: transparent;
+}
+
+.img--square {
+  object-fit: cover;
+  height: 100px;
+  max-width: 100px;
 }
 
 /*# sourceMappingURL=style.css.map */

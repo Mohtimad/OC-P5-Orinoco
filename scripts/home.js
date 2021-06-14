@@ -18,14 +18,16 @@ function uptadetCards(value) {
 }
 
 function updadeIconItemToCart() {
-  let localStorageCart = JSON.parse(localStorage.getItem('items'));
-  let totalItemsNumber = 0;
-  if (localStorageCart.length !== 0) {
-    for  ( let i = 0; i < localStorageCart.length; i++) { 
-      totalItemsNumber += parseInt(localStorageCart[i].amount)
-    }
-    if (totalItemsNumber !== 0) {
-      document.getElementById('cartNumber').textContent = totalItemsNumber;
+  if (localStorage.length !== 0) {
+    let localStorageCart = JSON.parse(localStorage.getItem('items'));
+    let totalItemsNumber = 0;
+    if (localStorageCart.length !== 0) {
+      for  ( let i = 0; i < localStorageCart.length; i++) { 
+        totalItemsNumber += parseInt(localStorageCart[i].amount)
+      }
+      if (totalItemsNumber > 0) {
+        document.getElementById('cartNumber').textContent = totalItemsNumber;
+      }
     }
   }
 }
@@ -43,5 +45,4 @@ fetch("http://localhost:3000/api/cameras")
   })
   .catch(function(err) {
     // Une erreur est survenue
-    windows.alert(err)
   });

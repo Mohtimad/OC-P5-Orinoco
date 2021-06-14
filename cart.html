@@ -13,7 +13,7 @@
 <body>
 
     <!-- START HEADER -->
-    <header>
+    <header class="bg--by-theme">
         <div class="container">
         <div class="row">
             <nav class="col navbar navbar-expand-md navbar-light">
@@ -43,14 +43,25 @@
     <main class="container-fluid site-content">
         <div class="container-fluid mt-3">
             <div class="row ">
-                <div class="col-12 col-lg-12  img-thumbnail pt-3 pb-5">
+                <div class="col-12  img-thumbnail pt-3 pb-5">
                     <div class="row">
-                        <div  class="col-12 d-flex justify-content-start d-flex align-items-center">
+                        <div  class="col-12 d-flex justify-content-start d-flex align-items-center pb-3">
                         <a href="./index.html" class="text-decoration-none h3 mr-5 ml-4"><i class="fas fa-arrow-left"></i></a>
                         <h1 class="h3 text-center">Panier</h1> 
                     </div>
                 </div>
-                
+                    <div class="container" id="productCartList">
+                        <!--JavaScript-->
+                    </div>
+                    <div class="container">
+                    <div class="row">
+                        <div class="col m-3">
+                            <p class="text-right">Total : <strong class="p-1" id="totalPrice">0.00</strong>€ 
+                                <button class="btn btn-outline-primary ml-3" id="clearCart">Vider les panier</button></p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -80,5 +91,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./scripts/cart.js"></script>
 </body>
 </html>
