@@ -1,5 +1,5 @@
 class CartStorage {
-  constructor(id, lense, amount, available) {
+  constructor(id, lense, amount) {
     this.id = id;
     this.lense = lense;
     this.amount = amount;
@@ -55,7 +55,6 @@ function updatePrice(data) {
 function updadeIconItemToCart() {
   if (localStorage.length !== 0) {
     let localStorageCart = JSON.parse(localStorage.getItem('items'));
-    console.log(localStorageCart)
     let totalItemsNumber = 0;
     if (localStorageCart.length !== 0) {
       for  ( let i = 0; i < localStorageCart.length; i++) { 
@@ -67,7 +66,6 @@ function updadeIconItemToCart() {
     }
   }
 }
-
 
 function addToCart() {
   const buttonSubmit = document.getElementById('addToCart');
@@ -82,7 +80,7 @@ function addToCart() {
       } else {
         let storageCart = JSON.parse(localStorage.getItem('items'));
         for ( let i = 0; i < storageCart.length ; i++) {
-          if (storageCart[i].id === idURL) {
+          if (storageCart[i].id === idURL && storageCart[i].lense === lense) {
             storageCart[i] = new CartStorage (idURL, lense, amount);
             break;
           } else {
@@ -109,15 +107,14 @@ const idURL = parsedUrl.searchParams.get("id");
       if (res.ok) {
         return res.json();
       }
+      throw new Error(res.status);
     })
     .then(function(value) {
         updadeIconItemToCart();
         updateProduct(value);
-        updatePrice(value)
-        addToCart()
+        updatePrice(value);
+        addToCart();
     })
     .catch(function(err) {
-      document.getElementById("productName")
-        .textContent = ("Cette élément n’existe pas ou n’est plus disponible.");
-      document.getElementById('addToCart').setAttribute("disabled", "");
+      document.location.href='./404.html';
     });

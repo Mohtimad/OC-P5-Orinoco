@@ -40,7 +40,6 @@ fetch("http://localhost:3000/api/cameras")
   })
   .then(function(value) {
     uptadetCards(value);
-    
     updadeIconItemToCart()
   })
   .catch(function(err) {
