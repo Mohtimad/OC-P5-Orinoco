@@ -17,7 +17,7 @@ function updateCart(data) {
     let storageCart = JSON.parse(localStorage.getItem('items'));
     let totalPrice = 0;
     const eltProductCartList =  document.getElementById("productCartList");
-    if (storageCart.length !== 0) {
+    if (storageCart) {
         for (let i = 0; i < storageCart.length; i++) {
             for ( let j = 0; j < data.length; j++){
                 if (data[j]._id === storageCart[i].id) { 
@@ -28,11 +28,11 @@ function updateCart(data) {
                                                         </div>
                                                         <div class="col-12 col-md-9 p-3">
                                                             <div class="row">
-                                                                <div class="col-12 col-md-4">
+                                                                <div class="col-12 col-md-auto col-lg-4">
                                                                     <p><strong>Nom : </strong><a class="text-center" href="products.html?id=${data[j]._id}">${data[j].name}</a></p>
                                                                     <p><strong>Lentille : </strong>${data[j].lenses[storageCart[i].lense]}</p>
                                                                 </div>
-                                                                <div class="col-12 col-md-4">
+                                                                <div class="col-12 col-md-auto col-lg-4">
                                                                     <p><strong>Prix : </strong>${((data[j].price) / 100).toFixed(2)}€</p>
                                                                     <p><strong>Quantité : </strong>${storageCart[i].amount}</p>
                                                                 </div>
@@ -41,7 +41,7 @@ function updateCart(data) {
                                                                     <strong class="p-2">${(storageCart[i].amount * ((data[j].price) / 100)).toFixed(2)}€</strong>
                                                                     </p>
                                                                 </div>
-                                                                <div class="col-12 col-md-1">
+                                                                <div class="col-12 col-md-2">
                                                                     <p class="text-right">
                                                                     <button id="trash-${i}" class="btn btn-primary btn-sm">
                                                                         <i class="fas fa-trash"></i>
@@ -105,20 +105,22 @@ function clearCart() {
 function deleteOnItem() {
     let cleared = false;
     let storageCart = JSON.parse(localStorage.getItem('items'));
-    for (let i = 0; i < storageCart.length; i++) {
-        if (cleared) {
-            break;
+    if (storageCart) {
+        for (let i = 0; i < storageCart.length; i++) {
+            if (cleared) {
+                break;
+            }
+            elt = document.getElementById('trash-' + i);
+                elt.addEventListener('click', function(e) {
+                    storageCart.splice(i, 1);
+                    if (storageCart.length === 0) {
+                        localStorage.clear();
+                    } else {
+                        localStorage.setItem('items', JSON.stringify(storageCart));
+                    }
+                    document.location.reload();
+                })  
         }
-        elt = document.getElementById('trash-' + i);
-            elt.addEventListener('click', function(e) {
-                storageCart.splice(i, 1);
-                if (storageCart.length === 0) {
-                    localStorage.clear();
-                } else {
-                    localStorage.setItem('items', JSON.stringify(storageCart));
-                }
-                document.location.reload();
-            })  
     }
 }
 
@@ -130,13 +132,18 @@ const maxAmount = 10;
       if (res.ok) {
         return res.json();
       }
+      throw new Error(res.status);
     })
     .then(function(value) {
-        clearCart();
-        updateCart(value);
-        updadeIconItemToCart();
-        deleteOnItem();
+      clearCart();
+      updateCart(value);
+      updadeIconItemToCart();
+      deleteOnItem();
     })
     .catch(function(err) {
-
+        console.log(err);
+        document.getElementById('alert')
+          .innerHTML = `<div class="alert alert-danger text-center" role="alert">
+                        Échec de la tentative de récupération de données
+                        </div>`;
     });

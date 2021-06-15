@@ -28,6 +28,13 @@ h1 {
   font-size: 3.5rem;
 }
 
+#alert {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
 header {
   box-shadow: 0 5px 20px gray;
 }
@@ -63,7 +70,7 @@ footer {
 .img--square {
   object-fit: cover;
   height: 100px;
-  max-width: 100px;
+  width: 150px;
 }
 
 /*# sourceMappingURL=style.css.map */

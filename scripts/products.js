@@ -92,6 +92,12 @@ function addToCart() {
         localStorage.setItem('items', JSON.stringify(storageCart));
       }
         updadeIconItemToCart();
+        let eltAlert = document.getElementById('alert')
+        eltAlert.innerHTML = `<div class="alert alert-success" role="alert">Objet ajouté au panier</div>`;
+        setTimeout(function() {
+          eltAlert.innerHTML = ``;
+        }, 4000);
+        
      }
   })
 }

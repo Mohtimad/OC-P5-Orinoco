@@ -37,11 +37,16 @@ fetch("http://localhost:3000/api/cameras")
     if (res.ok) {
       return res.json();
     }
+    throw new Error(res.status);
   })
   .then(function(value) {
     uptadetCards(value);
-    updadeIconItemToCart()
+    updadeIconItemToCart();
   })
   .catch(function(err) {
-    // Une erreur est survenue
+    console.log(err);
+    document.getElementById('alert')
+      .innerHTML = `<div class="alert alert-danger text-center" role="alert">
+                    Échec de la tentative de récupération de données
+                    </div>`;
   });
