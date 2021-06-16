@@ -53,7 +53,7 @@ function updatePrice(data) {
 }
 
 function updadeIconItemToCart() {
-  if (localStorage.length !== 0) {
+  if (localStorage.items) {
     let localStorageCart = JSON.parse(localStorage.getItem('items'));
     let totalItemsNumber = 0;
     if (localStorageCart.length !== 0) {
@@ -73,7 +73,7 @@ function addToCart() {
     const lense = document.getElementById("lensesOptions").selectedIndex;
     const amount = parseInt(document.getElementById('amount').value);
     if (amount <= maxAmount && amount >= minAmount) { 
-      if (localStorage.length === 0) {
+      if (!localStorage.items) {
         let newStorageCart = [];
         newStorageCart[0] = new CartStorage (idURL, lense, amount);
         localStorage.setItem('items', JSON.stringify(newStorageCart))
@@ -93,11 +93,10 @@ function addToCart() {
       }
         updadeIconItemToCart();
         let eltAlert = document.getElementById('alert')
-        eltAlert.innerHTML = `<div class="alert alert-success" role="alert">Objet ajouté au panier</div>`;
+        eltAlert.innerHTML = `<div class="alert alert-success" role="alert">L'article a été ajouté à votre panier</div>`;
         setTimeout(function() {
-          eltAlert.innerHTML = ``;
+            eltAlert.innerHTML = "";
         }, 4000);
-        
      }
   })
 }
@@ -105,10 +104,11 @@ function addToCart() {
 
 const minAmount = 1;
 const maxAmount = 10;
-
+const serverUrl = "http://localhost:3000/api/cameras/";
 let parsedUrl = new URL(window.location.href);
 const idURL = parsedUrl.searchParams.get("id");
-  fetch("http://localhost:3000/api/cameras/" + idURL)
+
+  fetch(serverUrl + idURL)
     .then(function(res) {
       if (res.ok) {
         return res.json();

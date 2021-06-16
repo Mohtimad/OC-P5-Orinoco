@@ -18,7 +18,7 @@ function uptadetCards(value) {
 }
 
 function updadeIconItemToCart() {
-  if (localStorage.length !== 0) {
+  if (localStorage.items) {
     let localStorageCart = JSON.parse(localStorage.getItem('items'));
     let totalItemsNumber = 0;
     if (localStorageCart.length !== 0) {

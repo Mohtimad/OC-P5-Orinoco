@@ -20,7 +20,7 @@
             <a class="navbar-brand" href="index.html">
                 <img src="./img/logo.png" width="150" height="68" alt="Site logo">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+            <button aria-label="Menu" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div id="navbarContent" class="collapse navbar-collapse">
@@ -48,14 +48,14 @@
                 <div class="col-12  img-thumbnail pt-3 pb-5">
                     <div class="row">
                         <div  class="col-12 d-flex justify-content-start d-flex align-items-center pb-3">
-                            <a href="./index.html" class="text-decoration-none h3 mr-5 ml-4"><i class="fas fa-arrow-left"></i></a>
+                            <a aria-label="Retour a l'index" href="./index.html" class="text-decoration-none h3 mr-5 ml-4"><i class="fas fa-arrow-left"></i></a>
                             <h1 class="h3 text-center">Panier</h1> 
                         </div>
                     </div>
                     <div class="container">
                         <div class="row">
                             <div class="col m-3">
-                                <p class="text-right"><button class="btn btn-outline-primary ml-3" id="clearCart">Vider le panier</button></p>
+                                <p class="text-right"><button onclick="clearCart()" class="btn btn-outline-primary ml-3">Vider le panier</button></p>
                             </div>
                         </div>
                     </div>
@@ -69,15 +69,51 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container">
+                    <form id="contact-form" class="container img-thumbnail">
                         <div class="row">
+                            <div class="col-12">
+                                <h2 class="h4 pt-3 pb-3">
+                                    <i class="fas fa-store"></i> Passer commande
+                                </h2>
+                            </div>
                             <div class="col">
-                                <form>
+                                <div id="alertOrder">
 
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 pb-3">
+                                <label for="lastName">Nom :</label>
+                                <input type="text" class="form-control" required  id="lastName">
+                            </div>
+                            <div class="col-12 col-md-6 pb-3">
+                                <label for="firstName">Prénom :</label>
+                                <input type="text" class="form-control" required  id="firstName">
+                            </div>
+                        </div>      
+                        <div class="row">
+                            <div class="col-12 col-md-6 pb-3">
+                                <label for="address">Adresse :</label>
+                                <input type="text" class="form-control" required  id="address">
+                            </div>
+                            <div class="col-12 col-md-6 pb-3">
+                                <label for="city">Ville :</label>
+                                <input type="text" class="form-control" required  id="city">
+                            </div>
+                        </div>   
+                        <div class="row">
+                            <div class="col-12 col-md-6 pb-3">
+                                <label for="mail">E-mail :</label>
+                                <input type="mail" class="form-control" required  id="mail">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 p-4 text-right">
+                                <button onclick="submitOrder()" type="button" class="btn btn-primary text-nowrap">Valider la commande</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -96,9 +132,9 @@
                     <li class="list-inline-item"><a class="text-white" href="#">Conditions d'utilisations</a></li>
                 </ul>
                 <ul class="list-inline text-center">
-                    <li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-facebook-square"></i></a></li>
-                    <li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a aria-label="Lien Twitter"  class="text-white" href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a aria-label="Lien Facebook" class="text-white" href="#"><i class="fab fa-facebook-square"></i></a></li>
+                    <li class="list-inline-item"><a aria-label="Lien Instagram"  class="text-white" href="#"><i class="fab fa-instagram"></i></a></li>
                 </ul>
             </div>
         </div>

@@ -35,12 +35,21 @@ h1 {
   z-index: 10;
 }
 
+#alertOrder {
+  z-index: 10;
+}
+
 header {
   box-shadow: 0 5px 20px gray;
 }
 
 footer {
   box-shadow: 0 -5px 20px gray;
+}
+
+.img-confirm {
+  object-fit: cover;
+  max-width: 80%;
 }
 
 .card-img-top {

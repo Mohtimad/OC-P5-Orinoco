@@ -1,5 +1,50 @@
+class OrderObject {
+    constructor(firstName, lastName, address, city, email, products) {
+        this.contact = {firstName: firstName, 
+                        lastName: lastName, 
+                        address: address, 
+                        city: city, 
+                        email: email }
+        this.products = products;
+    }
+}
+
+class ValidateForm {
+    static email(input, eltName) {
+     if ( input && /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+[*]*$/.test(input))
+      {
+        return (true)
+      }
+      this.error(eltName)
+    }
+
+    static properNoun(input, eltName) {
+     if ( input && /^[a-zA-Z\.,'\-àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]*$/.test(input))
+      {
+        return (true)
+      }
+        this.error(eltName)
+    }
+
+    static isNotEmpty(input, eltName) {
+        if (input)
+         {
+           return (true)
+         }
+           this.error(eltName)
+       }
+
+    static error(eltName) {
+        document.getElementById('alertOrder')
+            .innerHTML = `<div class="alert alert-danger text-center" role="alert">
+                        "${eltName}" incorrect!
+                        </div>`;
+        return (false);
+    }
+}
+
 function updadeIconItemToCart() {
-    if (localStorage.length !== 0) {
+    if (localStorage.items) {
         let localStorageCart = JSON.parse(localStorage.getItem('items'));
         let totalItemsNumber = 0;
         if (localStorageCart.length !== 0) {
@@ -24,7 +69,7 @@ function updateCart(data) {
                     totalPrice += (data[j].price * (storageCart[i].amount).toFixed(2)) / 100 ;
                     eltProductCartList.innerHTML += `<div class="row border d-flex justify-content-center justify-content-md-between align-items-center pt-2 pb-2 mb-2">
                                                         <div class="col-12 col-md-3">
-                                                            <img src="${data[j].imageUrl}" class="img-fluid img-thumbnail img--square" alt="Caméra ${data[j].names}">
+                                                            <img src="${data[j].imageUrl}" class="img-fluid img-thumbnail img--square" alt="Caméra ${data[j].name}">
                                                         </div>
                                                         <div class="col-12 col-md-9 p-3">
                                                             <div class="row">
@@ -43,7 +88,7 @@ function updateCart(data) {
                                                                 </div>
                                                                 <div class="col-12 col-md-2">
                                                                     <p class="text-right">
-                                                                    <button id="trash-${i}" class="btn btn-primary btn-sm">
+                                                                    <button aria-label="Supprimer l'objet" id="trash-${i}" class="btn btn-primary btn-sm">
                                                                         <i class="fas fa-trash"></i>
                                                                     </button>
                                                                     </p>
@@ -52,39 +97,7 @@ function updateCart(data) {
                                                         </div>
                                                     </div>`;
                 break;
-                } else {
-                    if (j + 1 === data.length) {
-                        eltProductCartList.innerHTML += `<div class="row border d-flex justify-content-center justify-content-md-between align-items-center pt-2 pb-2 mb-2">
-                        <div class="col-12 col-md-3">
-                            <img src="./img/unknown.png" class="img-fluid img-thumbnail img--square" alt="unknown">
-                        </div>
-                        <div class="col-12 col-md-9 p-3">
-                            <div class="row">
-                                <div class="col-12 col-md-4">
-                                    <p><strong>Nom : </strong></p>
-                                    <p><strong>Lentille : </strong></p>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <p><strong>Prix : </strong></p>
-                                    <p><strong>Quantité : </strong>${storageCart[i].amount}</p>
-                                </div>
-                                <div class="col-12 col-md-2">
-                                    <p class="text-right">
-                                    <strong class="p-2"></strong>
-                                    </p>
-                                </div>
-                                <div class="col-12 col-md-1">
-                                    <p class="text-right">
-                                    <button id="trash-${i}" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                    }
-                }
+                } 
             }
         }
         document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
@@ -92,24 +105,14 @@ function updateCart(data) {
 }
 
 function clearCart() {
-    const buttonClear = document.getElementById('clearCart');
-    buttonClear.addEventListener('click', function(e) {
-        document.getElementById("productCartList").innerHTML = "";
-        localStorage.clear();
-        document.getElementById('cartNumber').textContent = "";
-        document.getElementById('totalPrice').textContent = (0).toFixed(2);
-
-    })
+        localStorage.removeItem('items');
+        document.location.reload();
 }
   
-function deleteOnItem() {
-    let cleared = false;
+function deleteOneItem() {
     let storageCart = JSON.parse(localStorage.getItem('items'));
     if (storageCart) {
         for (let i = 0; i < storageCart.length; i++) {
-            if (cleared) {
-                break;
-            }
             elt = document.getElementById('trash-' + i);
                 elt.addEventListener('click', function(e) {
                     storageCart.splice(i, 1);
@@ -124,26 +127,98 @@ function deleteOnItem() {
     }
 }
 
-const minAmount = 1;
-const maxAmount = 10;
+function addingAlert(text) {
+    document.getElementById('alertOrder')
+        .innerHTML = `<div class="alert alert-danger text-center" role="alert">
+                    ${text}
+                    </div>`;
 
-  fetch("http://localhost:3000/api/cameras/")
+}
+
+function submitOrder() {
+    const form = document.getElementById('contact-form');
+    const storageCart = JSON.parse(localStorage.getItem('items'));
+    let itemsList = [];
+    if (storageCart && storageCart.length > 0) {
+        for (let i = 0; i < storageCart.length; i++) {
+            itemsList.push(storageCart[i].id)
+        }
+        if (ValidateForm.properNoun(form.lastName.value, "Nom") &&
+            ValidateForm.properNoun(form.firstName.value, "Prénom") &&
+            ValidateForm.isNotEmpty(form.address.value, "Adresse") &&
+            ValidateForm.properNoun(form.city.value, "Ville") &&
+            ValidateForm.email(form.mail.value, "E-mail")){
+
+            let orderObject = new OrderObject(  form.lastName.value,
+                                                form.firstName.value,
+                                                form.address.value,
+                                                form.city.value,
+                                                form.mail.value,
+                                                itemsList );
+            fetch(serverUrl + "order/", {
+                method: "POST",
+                headers: { 
+                    'Accept': 'application/json', 
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(orderObject)
+            })
+                .then(function(res) {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    throw new Error(res.status);
+            })
+                .then(function(value) {
+                    let totalPrice = 0;
+                    let ctrlValue = 0;
+                    for (let i = 0; i < value.products.length; i++) {
+                        totalPrice += (value.products[i].price * storageCart[i].amount);
+                    }
+                    const dataUrl = "?orderId=" + value.orderId +
+                                    "&firstName=" + value.contact.firstName +
+                                    "&lastName=" + value.contact.lastName +
+                                    "&price=" + totalPrice;
+                                    
+                    for ( let i = 0; i < dataUrl.length; i++) {
+                        ctrlValue += dataUrl.charCodeAt(i);
+                    }
+                    console.log(totalPrice);
+                    localStorage.removeItem('items');
+                    document.location.href = "./confirm.html" + dataUrl + "&cv=" + ctrlValue;
+            })
+                .catch(function(err) {
+                    console.log(err);
+                    addingAlert(err);
+            });
+        }
+    } else {
+        addingAlert("Le panier est vide !")
+    }
+}
+
+/* *************************************** */
+/* **************** START **************** */
+/* *************************************** */
+
+const serverUrl = "http://localhost:3000/api/cameras/";
+
+fetch(serverUrl)
     .then(function(res) {
-      if (res.ok) {
+        if (res.ok) {
         return res.json();
-      }
-      throw new Error(res.status);
+        }
+        throw new Error(res.status);
     })
     .then(function(value) {
-      clearCart();
-      updateCart(value);
-      updadeIconItemToCart();
-      deleteOnItem();
+        updateCart(value);
+        updadeIconItemToCart();
+        deleteOneItem();
     })
     .catch(function(err) {
         console.log(err);
         document.getElementById('alert')
-          .innerHTML = `<div class="alert alert-danger text-center" role="alert">
+            .innerHTML = `<div class="alert alert-danger text-center" role="alert">
                         Échec de la tentative de récupération de données
                         </div>`;
     });
