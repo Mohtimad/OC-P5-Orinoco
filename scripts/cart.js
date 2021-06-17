@@ -97,10 +97,15 @@ function updateCart(data) {
                                                         </div>
                                                     </div>`;
                 break;
-                } 
+                } else {
+                    if (j + 1 === data.length) {
+                        storageCart.splice(i, 1);
+                    }
+                }
             }
         }
         document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+        localStorage.setItem('items', JSON.stringify(storageCart));
     }
 }
 
