@@ -1,9 +1,10 @@
 function getCtrlValue(url) {
     let tmpArray = url.search.split('&cv=');
+    let urlData =  decodeURI(tmpArray[0]);
     let urlCtrlValue = parseInt(tmpArray[1]);
     let ctrlValue = 0;
-    for ( let i = 0; i < tmpArray[0].length; i++) {
-        ctrlValue += tmpArray[0].charCodeAt(i);
+    for ( let i = 0; i < urlData.length; i++) {
+        ctrlValue += urlData.charCodeAt(i);
     }
     if (ctrlValue === urlCtrlValue) {
         return true;

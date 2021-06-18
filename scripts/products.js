@@ -1,8 +1,9 @@
 class CartStorage {
-  constructor(id, lense, amount) {
+  constructor(id, lense, amount, available) {
     this.id = id;
     this.lense = lense;
     this.amount = amount;
+    this.available = available;
   }
 }
 
@@ -34,7 +35,7 @@ function updateProduct(data) {
     /* ---------- UPDATE URL & ALT IMAGE ---------- */
     eltImg = document.getElementById("productImg");
     eltImg.setAttribute("src", data.imageUrl);
-    eltImg.setAttribute("alt", "Caméra " + data.name);
+    eltImg.setAttribute("alt", "Appareil photo " + data.name);
 }
     
 function updatePrice(data) {
@@ -75,17 +76,17 @@ function addToCart() {
     if (amount <= maxAmount && amount >= minAmount) { 
       if (!localStorage.items) {
         let newStorageCart = [];
-        newStorageCart[0] = new CartStorage (idURL, lense, amount);
+        newStorageCart[0] = new CartStorage (idURL, lense, amount, true);
         localStorage.setItem('items', JSON.stringify(newStorageCart))
       } else {
         let storageCart = JSON.parse(localStorage.getItem('items'));
         for ( let i = 0; i < storageCart.length ; i++) {
           if (storageCart[i].id === idURL && storageCart[i].lense === lense) {
-            storageCart[i] = new CartStorage (idURL, lense, amount);
+            storageCart[i] = new CartStorage (idURL, lense, amount, true);
             break;
           } else {
             if ( i + 1 === storageCart.length) { 
-              storageCart.push(new CartStorage (idURL, lense, amount));
+              storageCart.push(new CartStorage (idURL, lense, amount, true));
             }
           }
         }
@@ -93,7 +94,7 @@ function addToCart() {
       }
         updadeIconItemToCart();
         let eltAlert = document.getElementById('alert')
-        eltAlert.innerHTML = `<div class="alert alert-success" role="alert">L'article a été ajouté à votre panier</div>`;
+        eltAlert.innerHTML = `<div class="alert alert-success text-center" role="alert">L'article a été ajouté à votre panier</div>`;
         setTimeout(function() {
             eltAlert.innerHTML = "";
         }, 4000);
