@@ -11,6 +11,7 @@ class OrderObject {
 
 class ValidateForm {
     static email(input, returnTextIfFalse) {
+     // test regex email
      if ( input && /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+[*]*$/.test(input))
       {
         return (true)
@@ -18,6 +19,7 @@ class ValidateForm {
       this.error(returnTextIfFalse)
     }
 
+     // test regex proper noun
     static properNoun(input, returnTextIfFalse) {
      if ( input && /^[a-zA-Z\.,'\-àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]*$/.test(input))
       {
@@ -26,6 +28,7 @@ class ValidateForm {
         this.error(returnTextIfFalse)
     }
 
+    // if not empty
     static isNotEmpty(input, returnTextIfFalse) {
         if (input)
          {
@@ -45,6 +48,7 @@ function addingAlert(text, eltId) {
     elt.innerHTML = `<div class="alert alert-danger text-center" role="alert">
                     ${text}
                     </div>`;
+    // display alert 5secs
     setTimeout(function() {
         elt.innerHTML = "";
     },5000);
@@ -59,9 +63,7 @@ function updadeIconItemToCart() {
             for  ( let i = 0; i < localStorageCart.length; i++) { 
                 totalItemsNumber += parseInt(localStorageCart[i].amount)
             }
-            if (totalItemsNumber !== 0) {
-                document.getElementById('cartNumber').textContent = totalItemsNumber;
-            }
+            document.getElementById('cartNumber').textContent = totalItemsNumber;
         }
     }
 }
@@ -73,27 +75,25 @@ function updateCart(data) {
         let storageCart = JSON.parse(localStorage.getItem('items'));
         for (let i = 0; i < storageCart.length; i++) {
             for ( let j = 0; j < data.length; j++){
-                if (data[j]._id === storageCart[i].id) { 
-                    if (storageCart[i].available) {
-                        totalPrice += (data[j].price * (storageCart[i].amount).toFixed(2)) / 100 ;
-                    }
+                if (data[j]._id === storageCart[i].id) {
+                    totalPrice += (data[j].price * (storageCart[i].amount).toFixed(2)) / 100 ;
                     eltProductCartList.innerHTML += `<div class="row border d-flex justify-content-center justify-content-md-between align-items-center pt-2 pb-2 mb-2">
                                                         <div class="col-12 col-md-3">
                                                             <img src="${data[j].imageUrl}" class="img-fluid img-thumbnail img--square" alt="Appareil photo ${data[j].name}">
                                                         </div>
                                                         <div class="col-12 col-md-9 p-3">
                                                             <div class="row">
-                                                                <div class="col-12 col-md-5 col-lg-4">
-                                                                    <p><strong>Nom : </strong><a class="text-center" href="products.html?id=${data[j]._id}">${data[j].name}</a></p>
-                                                                    <p><strong>Lentille : </strong>${data[j].lenses[storageCart[i].lense]}</p>
+                                                                <div class="col-6 col-md-5 col-lg-4">
+                                                                    <p><strong>Nom : <br/></strong><a class="text-center" href="products.html?id=${data[j]._id}">${data[j].name}</a></p>
+                                                                    <p><strong>Lentille : <br/></strong>${data[j].lenses[storageCart[i].lense]}</p>
                                                                 </div>
-                                                                <div class="col-12 col-md-3 col-lg-4">
-                                                                    <p><strong>Prix : </strong>${((data[j].price) / 100).toFixed(2)}€</p>
+                                                                <div class="col-6 col-md-3 col-lg-4">
+                                                                    <p><strong>Prix unitaire: <br/></strong>${((data[j].price) / 100).toFixed(2)}€</p>
                                                                     <p><strong>Quantité : </strong>${storageCart[i].amount}</p>
                                                                 </div>
                                                                 <div class="col-12 col-md-2">
-                                                                    <p class="text-right">
-                                                                    <strong class="p-2">${(storageCart[i].amount * ((data[j].price) / 100)).toFixed(2)}€</strong>
+                                                                    <p class="text-right text-md-left">
+                                                                    <strong>Total: <span  class="text-danger">${(storageCart[i].amount * ((data[j].price) / 100)).toFixed(2)}€</span></strong>
                                                                     </p>
                                                                 </div>
                                                                 <div class="col-12 col-md-2">
@@ -117,13 +117,13 @@ function updateCart(data) {
                         <div class="col-12 col-md-9 p-3">
                             <div class="row">
                                 <div class="col-12 col-md-5 col-lg-4">
-                                    <p><strong>Produit indisponible</strong></p>
+                                    <p><strong>Produit<br/>indisponible</strong></p>
                                 </div>
                                 <div class="col-12 col-md-3 col-lg-4">
                                     <p><strong>Quantité : </strong>${storageCart[i].amount}</p>
                                 </div>
                                 <div class="col-12 col-md-2">
-                                    <p class="text-right">
+                                    <p class="text-right text-md-center">
                                     <strong class="p-2">---</strong>
                                     </p>
                                 </div>

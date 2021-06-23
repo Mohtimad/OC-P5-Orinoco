@@ -7,7 +7,7 @@ function uptadetCards(value) {
                                 ${value[i].name}
                               </h2>
                               <a href="products.html?id=${value[i]._id}" class="stretched-link text-danger" style="position: relative;">
-                                <img class="card-img-top" src="${value[i].imageUrl}" alt="Caméra ${value[i].name}">
+                                <img class="card-img-top" src="${value[i].imageUrl}" alt="Appareil photo ${value[i].name}">
                               </a>
                               <div class="card-footer text-muted text-right ">
                                 <p class="price font-family--Lobster">${(value[i].price / 100).toFixed(2)}€</p>
@@ -31,6 +31,10 @@ function updadeIconItemToCart() {
     }
   }
 }
+
+/* *************************************** */
+/* **************** START **************** */
+/* *************************************** */
 
 fetch("http://localhost:3000/api/cameras")
   .then(function(res) {

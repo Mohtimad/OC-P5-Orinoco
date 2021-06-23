@@ -14,6 +14,8 @@ function updateProduct(data) {
     /* ---------- UPDATE PRICE AND ITEM MIN / MAX---------- */
     document.getElementById("price")
         .textContent = (data.price / 100).toFixed(2);
+    document.getElementById("unitPrice")
+        .textContent = (data.price / 100).toFixed(2);
       eltAmount.setAttribute("min", minAmount)
       eltAmount.setAttribute("max", maxAmount)
     /* ---------- UPDATE PRODUCT NAME ---------- */
@@ -95,6 +97,7 @@ function addToCart() {
         updadeIconItemToCart();
         let eltAlert = document.getElementById('alert')
         eltAlert.innerHTML = `<div class="alert alert-success text-center" role="alert">L'article a été ajouté à votre panier</div>`;
+        // Display alert 5 secs
         setTimeout(function() {
             eltAlert.innerHTML = "";
         }, 4000);
@@ -102,6 +105,9 @@ function addToCart() {
   })
 }
 
+/* *************************************** */
+/* **************** START **************** */
+/* *************************************** */
 
 const minAmount = 1;
 const maxAmount = 10;
