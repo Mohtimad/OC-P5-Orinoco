@@ -1,5 +1,12 @@
 # OPENCLASSROOMS P5
 
+## Installation du back-end
+- Avoir Node et npm installés localement.
+- À partir du dossier du projet, exécutez:
+``npm install``
+``cd back``
+``node server``
+
 ## Architecture générale
 L’application web sera composée de 4 pages :
 
@@ -64,6 +71,3 @@ Chaque API contient 3 paramètres :
 
 ### Validation des données
 Pour les routes POST, l’objet contact envoyé au serveur doit contenir les champs firstName, lastName, address, city et email. Le tableau des produits envoyé au backend doit être un array de strings products. Les types de ces champs et leur présence doivent être validés avant l’envoi des données au serveur.
-
-### Repository GitHub à cloner
-[https://github.com/OpenClassrooms-Student-Center/JWDP5.git](https://github.com/OpenClassrooms-Student-Center/JWDP5.git)
