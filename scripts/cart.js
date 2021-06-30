@@ -72,10 +72,13 @@ function updateCart(data) {
     let totalPrice = 0;
     const eltProductCartList =  document.getElementById("productCartList");
     if (localStorage.items) {
+        document.getElementById('clearCart')
+            .removeAttribute("disabled");
         let storageCart = JSON.parse(localStorage.getItem('items'));
         for (let i = 0; i < storageCart.length; i++) {
             for ( let j = 0; j < data.length; j++){
                 if (data[j]._id === storageCart[i].id) {
+                    let lenses = (data[j].lenses[storageCart[i].lense] ? data[j].lenses[storageCart[i].lense] : '---');
                     totalPrice += (data[j].price * (storageCart[i].amount).toFixed(2)) / 100 ;
                     eltProductCartList.innerHTML += `<div class="row border d-flex justify-content-center justify-content-md-between align-items-center pt-2 pb-2 mb-2">
                                                         <div class="col-12 col-md-3">
@@ -85,7 +88,7 @@ function updateCart(data) {
                                                             <div class="row">
                                                                 <div class="col-6 col-md-5 col-lg-4">
                                                                     <p><strong>Nom : <br/></strong><a class="text-center" href="products.html?id=${data[j]._id}">${data[j].name}</a></p>
-                                                                    <p><strong>Lentille : <br/></strong>${data[j].lenses[storageCart[i].lense]}</p>
+                                                                    <p><strong>Lentille : <br/></strong>${lenses}</p>
                                                                 </div>
                                                                 <div class="col-6 col-md-3 col-lg-4">
                                                                     <p><strong>Prix unitaire: <br/></strong>${((data[j].price) / 100).toFixed(2)}€</p>
@@ -107,6 +110,7 @@ function updateCart(data) {
                                                         </div>
                                                     </div>`;
                 break;
+                // if the object does not exist on the server
                 } else {
                     if (j + 1 === data.length) {
                         storageCart[i].available = false;
