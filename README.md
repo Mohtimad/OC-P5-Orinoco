@@ -3,8 +3,8 @@
 ## Installation du back-end
 - Avoir Node et npm installés localement.
 - À partir du dossier du projet, exécutez:
-``npm install``
 ``cd back``
+``npm install``
 ``node server``
 
 ## Architecture générale
