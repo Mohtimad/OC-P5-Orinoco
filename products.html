@@ -42,44 +42,44 @@
 
     <!-- START MAIN -->
     <main class="container-fluid site-content">
-        <div id="alert">
-        </div>
+        <div id="alert"></div>
         <div class="container-fluid mt-5">
             <div class="row ">
                 <div class="col-12  img-thumbnail pt-3 pb-5">
                     <div class="row">
                         <div  class="col-12 d-flex justify-content-start d-flex align-items-center">
-                        <a aria-label="Retour à l'index" href="./index.html" class="text-decoration-none h3 mr-5 ml-4"><i class="fas fa-arrow-left"></i></a>
-                        <h1 class="h3 text-center" id="productName"></h1> 
-                    </div>
-                </div>
-                <div class="col mt-5">
-                    <div class="row justify-content-lg-center">
-                        <div class="col-12 col-md-6 col-lg-5 mb-3 align-items-center">
-                            <img src="./img/empty.png" class="img-fluid img-thumbnail" id="productImg" alt="...">
+                            <a aria-label="Retour à l'index" href="./index.html" class="text-decoration-none h3 mr-5 ml-4"><i class="fas fa-arrow-left"></i></a>
+                            <h1 class="h3 text-center" id="productName"></h1> 
                         </div>
-                        <form class="col-12 col-md-6 col-lg-5">
-                            <label for="amount">Quantité</label>
-                            <div class="form-floating  mb-3">
-                                <input type="number" value="1" min="1" max="1" class="form-control" required  id="amount">
-                                <p hidden class="small text-danger" id="amountFeedBack"><strong>Quantité non valide.</strong></p>
+                    </div>
+                    <div class="col mt-5">
+                        <div class="row justify-content-lg-center">
+                            <div class="col-12 col-md-6 col-lg-5 mb-3 align-items-center">
+                                <img src="./img/empty.png" class="img-fluid img-thumbnail" id="productImg" alt="...">
                             </div>
-                            <label for="lensesOptions">Lentille</label>
-                            <select class="form-control form-control-md mb-4" id="lensesOptions" disabled>
-                                <!--JavaScript set options-->>
-                            </select>
-                            <div class="row mb-3">
-                                <div class="col-12 mt-2">
-                                    <p>Prix unitaire : <span id="unitPrice">0.00</span>€</p>
-                                    <p>Total : <span id="price" class="h4">0.00</span><small class="text-muted">€</small></p>
+                            <form class="col-12 col-md-6 col-lg-5">
+                                <label for="amount">Quantité</label>
+                                <div class="form-floating  mb-3">
+                                    <input type="number" value="1" min="1" max="1" class="form-control" required  id="amount">
+                                    <p hidden class="small text-danger" id="amountFeedBack"><strong>Quantité non valide.</strong></p>
                                 </div>
-                                <div class="col-12">
-                                    <button id="addToCart" type="button" class="btn btn-primary text-nowrap">Ajouter au panier</button>
+                                <label for="lensesOptions">Lentille</label>
+                                <select class="form-control form-control-md mb-4" id="lensesOptions" disabled>
+                                    <!--JavaScript set options-->
+                                </select>
+                                <div class="row mb-3">
+                                    <div class="col-12 mt-2">
+                                        <p>Prix unitaire : <span id="unitPrice">0.00</span>€</p>
+                                        <p>Total : <span id="price" class="h4">0.00</span><small class="text-muted">€</small></p>
+                                    </div>
+                                    <div class="col-12">
+                                        <button id="addToCart" type="button" class="btn btn-primary text-nowrap">Ajouter au panier</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="h5">Description:</p>
-                            <p class="text-black" id="description">---</p>
-                        </form>
+                                <p class="h5">Description:</p>
+                                <p class="text-black" id="description">---</p>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
