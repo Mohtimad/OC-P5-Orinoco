@@ -1,4 +1,4 @@
-# OPENCLASSROOMS P5
+# Orinoco - Projet 05
 
 ## Installation du back-end
 - Avoir Node et npm installés localement.
